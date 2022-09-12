@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mvc.mappers.boardMapper">
+
+<!-- 	공지사항 게시판 글쓰기 SQL구문 -->
+	<insert id="insertBoard">
+		INSERT INTO BOARD(NUM,
+						   NAME,
+						   PASS,
+						   SUBJECT,
+						   CONTENT,
+						   READCOUNT,
+						   DATE) 
+		VALUES(#{num},
+			   #{name},
+			   #{pass},
+			   #{subject},
+			   #{content},
+			   #{readcount},
+			   #{date})
+	</insert>
+	
+<!-- 	공지사항 게시판 글 개수 확인 SQL구문 -->
+	<select id="getMaxNum" resultType="java.lang.Integer">
+		SELECT MAX(NUM)
+		  FROM BOARD
+	</select>
+	
+<!-- 	공지사항 게시판 페이지 SQL구문 -->
+	<select id="getBoardList" resultType="com.mvc.domain.BoardDTO">
+		SELECT * 
+		  FROM BOARD
+		 ORDER BY NUM DESC LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+<!-- 	공지사항 게시판 개수 SQL구문 -->
+	<select id="getBoardCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		  FROM BOARD
+	</select>
+	
+<!-- 	공지사항 게시판 글 상세내용 SQL구문 -->
+	<select id="getBoard" resultType="com.mvc.domain.BoardDTO">
+		SELECT *
+		  FROM BOARD
+		 WHERE NUM = #{num}
+	</select>
+	
+<!-- 	<select id="numCheck" resultType="com.mvc.domain.BoardDTO"> -->
+<!-- 		SELECT *
+			  FROM BOARD 
+			 WHERE NUM = #{num} 
+			   AND PASS = #{pass} -->
+<!-- 	</select> -->
+	
+<!-- 	공지사항 게시판 글 수정 SQL구문 -->
+	<update id="updateBoard">
+		UPDATE BOARD
+		   SET SUBJECT = #{subject}, CONTENT = #{content} 
+		 WHERE NUM = #{num}
+	</update>
+	
+<!-- 	공지사항 게시판 글 삭제 SQL구문 -->
+	<delete id="deleteBoard">
+		DELETE 
+		  FROM BOARD
+		 WHERE NUM = #{num}
+	</delete>
+
+	
+</mapper>
