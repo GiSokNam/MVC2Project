@@ -47,9 +47,9 @@
    </table>
    <div id="table_btn">
     <c:if test="${!(empty sessionScope.id)}">
-     
+     <c:if test="${sessionScope.id eq 'nam'}">
       <a href="${pageContext.request.contextPath}/notice/write"><input type="button" value="글쓰기" class="btn"></a>
-     
+     </c:if>
     </c:if>
    </div>
    <br>

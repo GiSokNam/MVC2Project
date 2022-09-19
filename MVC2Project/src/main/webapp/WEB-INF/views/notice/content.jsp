@@ -51,12 +51,12 @@
       <div id="table_btn">
 		<input type="button" value="목록으로" class="btn" onclick="location.href='${pageContext.request.contextPath}/notice'" style="float: right;">
 		 <c:if test="${!(empty sessionScope.id)}">
-		  
+		  <c:if test="${sessionScope.id eq 'nam'}">
 		   <input type="button" value="삭제하기" class="btn" style="float: right;" 
        		onclick="location.href='${pageContext.request.contextPath}/notice/delete?num=${noticeDTO.num}'">
        	   <input type="button" value="수정하기" class="btn" style="float: right;" 
        		onclick="location.href='${pageContext.request.contextPath}/notice/update?num=${noticeDTO.num}'">
-		  
+		  </c:if>
 		 </c:if>
 	  </div>
      </td>
